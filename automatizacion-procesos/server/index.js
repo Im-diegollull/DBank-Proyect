@@ -39,18 +39,18 @@ app.post("/api/process", upload.single("file"), (req, res) => {
 });
 
 const extractInvoiceNumber = (text) => {
-  // Lógica para extraer el número de factura del texto
-  return "12345";
+  const match = text.match(/Invoice Number:\s*(\d+)/i);
+  return match ? match[1] : "No encontrado";
 };
 
 const extractDate = (text) => {
-  // Lógica para extraer la fecha del texto
-  return "2023-10-01";
+  const match = text.match(/Date:\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/i);
+  return match ? match[1] : "No encontrado";
 };
 
 const extractTotalAmount = (text) => {
-  // Lógica para extraer el monto total del texto
-  return "1500.00";
+  const match = text.match(/Total Amount:\s*\$?(\d+(\.\d{2})?)/i);
+  return match ? match[1] : "No encontrado";
 };
 
 app.listen(port, () => {
